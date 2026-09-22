@@ -15,16 +15,11 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             WifiProviderTheme {
-                MainScreen()
+               AppNavigation()
             }
         }
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun MainScreenPreview() {
-    WifiProviderTheme {
-        MainScreen()
-    }
-}
+
+
