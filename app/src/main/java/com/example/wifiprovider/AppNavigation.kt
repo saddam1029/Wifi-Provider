@@ -8,28 +8,24 @@ import com.example.wifiprovider.ui.MainScreen
 
 @Composable
 fun AppNavigation() {
-
     val navController = rememberNavController()
 
     NavHost(
         navController = navController,
         startDestination = "first"
-    ) {
-
-        composable("first") {
+    ){
+        composable("first"){
             FirstScreen(
-                onNavigateToSecondScreen = {text ->
-                    navController.navigate("second/$text")
+                onFirstScreenClicked = { name ->
+                    navController.navigate("second/$name")
                 }
             )
         }
 
-        composable("second/{text}") {  it ->
-
-            val text = it.arguments?.getString("text")
-
-            SecondScreen (
-                text = text ?: "",
+        composable("second/{name}") { backStackEntry ->
+            val name = backStackEntry.arguments?.getString("name")
+            SecondScreen(
+                name = name ?: "",
                 onBackClick = {
                     navController.popBackStack()
                 }
