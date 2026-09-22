@@ -12,7 +12,7 @@ import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
 fun FirstScreen(
-    onNavigateToSecondScreen : () -> Unit
+    onNavigateToSecondScreen : (String) -> Unit
 ) {
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -22,7 +22,9 @@ fun FirstScreen(
         Text("First Screen")
 
         Button(
-            onClick = onNavigateToSecondScreen
+            onClick = {
+                onNavigateToSecondScreen("Saddam")
+            }
         ) {
             Text("Navigate to Second Screen")
         }

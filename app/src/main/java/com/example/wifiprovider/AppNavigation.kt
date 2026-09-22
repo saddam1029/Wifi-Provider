@@ -18,14 +18,18 @@ fun AppNavigation() {
 
         composable("first") {
             FirstScreen(
-                onNavigateToSecondScreen = {
-                    navController.navigate("second")
+                onNavigateToSecondScreen = {text ->
+                    navController.navigate("second/$text")
                 }
             )
         }
 
-        composable("second") {
+        composable("second/{text}") {  it ->
+
+            val text = it.arguments?.getString("text")
+
             SecondScreen (
+                text = text ?: "",
                 onBackClick = {
                     navController.popBackStack()
                 }

@@ -10,10 +10,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 
-
-
 @Composable
 fun SecondScreen(
+    text: String,
     onBackClick: () -> Unit
 ) {
     Column(
@@ -22,6 +21,7 @@ fun SecondScreen(
         verticalArrangement = Arrangement.Center
     ) {
         Text("Second Screen")
+        Text("Hello $text")
         Button(
             onClick = onBackClick
         ) {
@@ -33,6 +33,8 @@ fun SecondScreen(
 @Preview(showBackground = true)
 @Composable
 fun SecondScreenPreview() {
-    SecondScreen(onBackClick = {})
+    SecondScreen(
+        text = "Android",
+        onBackClick = {})
 }
 
