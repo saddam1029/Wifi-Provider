@@ -17,9 +17,13 @@ import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
 fun FirstScreen(
-    onFirstScreenClicked: (String) -> Unit
+    onFirstScreenClicked: (String,Int) -> Unit
 ) {
     var name by remember {
+        mutableStateOf("")
+    }
+
+    var age by remember {
         mutableStateOf("")
     }
 
@@ -43,7 +47,7 @@ fun FirstScreen(
 
         Button(
             onClick = {
-                onFirstScreenClicked(name)
+                onFirstScreenClicked(name,27)
             }
         ) {
             Text("Go to Second Screen")

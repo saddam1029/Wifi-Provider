@@ -13,6 +13,7 @@ import androidx.compose.ui.tooling.preview.Preview
 @Composable
 fun SecondScreen(
     name: String,
+    age: Int,
     onBackClick: () -> Unit,
 ){
     Column(
@@ -20,7 +21,7 @@ fun SecondScreen(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text("Hello $name")
+        Text("My Name is $name & I am $age years old")
         Button(
             onClick = onBackClick
         ) {

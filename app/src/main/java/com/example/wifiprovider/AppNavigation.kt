@@ -16,16 +16,18 @@ fun AppNavigation() {
     ){
         composable("first"){
             FirstScreen(
-                onFirstScreenClicked = { name ->
-                    navController.navigate("second/$name")
+                onFirstScreenClicked = { name,age ->
+                    navController.navigate("second/$name/$age")
                 }
             )
         }
 
-        composable("second/{name}") { backStackEntry ->
+        composable("second/{name}/{age}") { backStackEntry ->
             val name = backStackEntry.arguments?.getString("name")
+            val age = backStackEntry.arguments?.getString("age")
             SecondScreen(
                 name = name ?: "",
+                age = age?.toIntOrNull() ?: 0,
                 onBackClick = {
                     navController.popBackStack()
                 }
