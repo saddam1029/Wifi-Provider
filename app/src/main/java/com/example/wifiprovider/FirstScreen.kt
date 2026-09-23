@@ -19,8 +19,6 @@ import androidx.compose.ui.tooling.preview.Preview
 fun FirstScreen(
     onFirstScreenClicked: () -> Unit
 ) {
-
-
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
