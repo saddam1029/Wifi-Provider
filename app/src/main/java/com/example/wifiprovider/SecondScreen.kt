@@ -3,6 +3,7 @@ package com.example.wifiprovider
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -12,20 +13,19 @@ import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
 fun SecondScreen(
-    name: String,
-    age: Int,
-    onBackClick: () -> Unit,
+    onSecondScreenClick: () -> Unit,
 ) {
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text("My Name is $name & I am $age years old")
+        Text(text = "Second Screen")
         Button(
-            onClick = onBackClick
+            onClick = onSecondScreenClick,
         ) {
-            Text("Return to First Screen")
+            Text("Second Screen")
         }
     }
+
 }
