@@ -13,10 +13,10 @@ fun AppNavigation() {
     NavHost(
         navController = navController,
         startDestination = "first"
-    ){
-        composable("first"){
+    ) {
+        composable("first") {
             FirstScreen(
-                onFirstScreenClicked = { name,age ->
+                onFirstScreenClicked = { name, age ->
                     navController.navigate("second/$name/$age")
                 }
             )

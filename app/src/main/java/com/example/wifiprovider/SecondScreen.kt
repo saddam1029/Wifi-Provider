@@ -15,7 +15,7 @@ fun SecondScreen(
     name: String,
     age: Int,
     onBackClick: () -> Unit,
-){
+) {
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
