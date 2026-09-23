@@ -16,7 +16,7 @@ fun AppNavigation() {
     ) {
         composable("first") {
             FirstScreen(
-                onFirstScreenClicked = {
+                onNavigateToSecondScreen = {
                     navController.navigate("second")
                 }
             )
@@ -24,7 +24,10 @@ fun AppNavigation() {
 
         composable("second") {
             SecondScreen(
-                onSecondScreenClick = {
+                onNavigateToThird = {
+                    navController.navigate("third")
+                },
+                onNavigateToFirst = {
                     navController.popBackStack()
                 }
             )
@@ -32,7 +35,7 @@ fun AppNavigation() {
 
         composable("third") {
             ThirdScreen(
-                onThirdScreenClick = {
+                onNavigateToSecond = {
                     navController.popBackStack()
                 }
             )
