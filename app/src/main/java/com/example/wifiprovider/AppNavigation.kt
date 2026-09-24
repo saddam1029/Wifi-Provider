@@ -7,12 +7,5 @@ import androidx.navigation.compose.rememberNavController
 
 @Composable
 fun AppNavigation() {
-    val navController = rememberNavController()
 
-    NavHost(
-        navController = navController,
-        startDestination = "first"
-    ) {
-
-    }
 }
