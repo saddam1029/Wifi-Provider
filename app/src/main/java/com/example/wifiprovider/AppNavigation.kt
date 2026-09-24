@@ -37,6 +37,11 @@ fun AppNavigation() {
             ThirdScreen(
                 onNavigateToSecond = {
                     navController.popBackStack()
+                },
+                onNavigateToFirst = {
+                    navController.navigate("first"){
+                        popUpTo("first")
+                    }
                 }
             )
         }

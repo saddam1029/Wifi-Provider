@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 @Composable
 fun ThirdScreen(
     onNavigateToSecond: () -> Unit,
+    onNavigateToFirst: () -> Unit
 ) {
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -21,6 +22,9 @@ fun ThirdScreen(
         Text(text = "Third Screen")
         Button(onClick = onNavigateToSecond) {
             Text(text = "Move to Second")
+        }
+        Button(onClick = onNavigateToFirst) {
+            Text("Move to First")
         }
     }
 }
