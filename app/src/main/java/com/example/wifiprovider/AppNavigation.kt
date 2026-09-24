@@ -13,38 +13,6 @@ fun AppNavigation() {
         navController = navController,
         startDestination = "first"
     ) {
-        composable("first") {
-            FirstScreen(
-                onNavigateToSecondScreen = {
-                    navController.navigate("second"){
-                        launchSingleTop = true
-                    }
-                }
-            )
-        }
 
-        composable("second") {
-            SecondScreen(
-                onNavigateToThird = {
-                    navController.navigate("third")
-                },
-                onNavigateToFirst = {
-                    navController.popBackStack()
-                }
-            )
-        }
-
-        composable("third") {
-            ThirdScreen(
-                onNavigateToSecond = {
-                    navController.popBackStack()
-                },
-                onNavigateToFirst = {
-                    navController.navigate("first"){
-                        popUpTo("first")
-                    }
-                }
-            )
-        }
     }
 }
