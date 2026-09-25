@@ -25,17 +25,25 @@ fun AppNavigation() {
     Scaffold(
         bottomBar = {
             NavigationBar {
-
                 NavigationBarItem(
                     selected = currentDestination?.route == Screen.Home.route,
                     onClick = {
-                        navController.navigate(Screen.Home.route)
+                        navController.navigate(Screen.Home.route){
+                            popUpTo(
+                                navController.graph.startDestinationId
+                            ){
+                                saveState = true
+                            }
+
+                            launchSingleTop = true
+                            restoreState = true
+                        }
                     },
                     icon = {
                         Text("🏠")
                     },
                     label = {
-                        Text("Home")
+                        androidx.compose.material3.Text("Home")
                     }
                 )
 
