@@ -50,7 +50,15 @@ fun AppNavigation() {
                 NavigationBarItem(
                     selected = currentDestination?.route == Screen.Wifi.route,
                     onClick = {
-                        navController.navigate(Screen.Wifi.route)
+                        navController.navigate(Screen.Wifi.route){
+                            popUpTo(
+                                navController.graph.startDestinationId
+                            ){
+                                saveState = true
+                            }
+                            launchSingleTop = true
+                            restoreState = true
+                        }
                     },
                     icon = {
                         Text("📶")
@@ -63,7 +71,15 @@ fun AppNavigation() {
                 NavigationBarItem(
                     selected = currentDestination?.route == Screen.Settings.route,
                     onClick = {
-                        navController.navigate(Screen.Settings.route)
+                        navController.navigate(Screen.Settings.route){
+                            popUpTo(
+                                navController.graph.startDestinationId
+                            ){
+                                saveState = true
+                            }
+                            launchSingleTop = true
+                            restoreState = true
+                        }
                     },
                     icon = {
                         Text("⚙️")
