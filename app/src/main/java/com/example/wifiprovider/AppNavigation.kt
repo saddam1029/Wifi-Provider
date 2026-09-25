@@ -34,6 +34,12 @@ fun AppNavigation() {
 
     val currentDestination = navBackStackEntry?.destination
 
+    val item = listOf(
+        Screen.Home,
+        Screen.Wifi,
+        Screen.Settings
+    )
+
     Scaffold(
         bottomBar = {
             Surface(
@@ -55,90 +61,38 @@ fun AppNavigation() {
                     containerColor = Color.Transparent,
                     tonalElevation = 0.dp
                 )  {
-                    NavigationBarItem(
-                        selected = currentDestination?.route == Screen.Home.route,
-                        onClick = {
-                            navController.navigate(Screen.Home.route){
-                                popUpTo(
-                                    navController.graph.startDestinationId
-                                ){
-                                    saveState = true
-                                }
+                    item.forEach { screen ->
+                        NavigationBarItem(
+                            selected = currentDestination?.route == screen.route,
+                            onClick = {
+                                navController.navigate(screen.route){
+                                    popUpTo(
+                                        navController.graph.startDestinationId
+                                    ){
+                                        saveState = true
+                                    }
 
-                                launchSingleTop = true
-                                restoreState = true
-                            }
-                        },
-                        icon = {
-                            Icon(
-                                painter = painterResource(id = R.drawable.ic_home),
-                                contentDescription = "Home"
-                            )
-                        },
-                        label = {
-                            androidx.compose.material3.Text("Home")
-                        },
-                        colors = NavigationBarItemDefaults.colors(
-                            selectedIconColor = Color(0xFF007BFF),
-                            selectedTextColor = Color(0xFF007BFF),
-                        )
-                    )
-
-                    NavigationBarItem(
-                        selected = currentDestination?.route == Screen.Wifi.route,
-                        onClick = {
-                            navController.navigate(Screen.Wifi.route){
-                                popUpTo(
-                                    navController.graph.startDestinationId
-                                ){
-                                    saveState = true
+                                    launchSingleTop = true
+                                    restoreState = true
                                 }
-                                launchSingleTop = true
-                                restoreState = true
-                            }
-                        },
-                        icon = {
-                            Icon(
-                                painter = painterResource(id = R.drawable.ic_wifi),
-                                contentDescription = "wifi"
+                            },
+                            icon = {
+                                Icon(
+                                    painter = painterResource(id = screen.icon),
+                                    contentDescription = "Home"
+                                )
+                            },
+                            label = {
+                                Text(screen.title)
+                            },
+                            colors = NavigationBarItemDefaults.colors(
+                                selectedIconColor = Color(0xFF007BFF),
+                                selectedTextColor = Color(0xFF007BFF),
+                                indicatorColor = Color.Transparent
                             )
-                        },
-                        label = {
-                            Text("Wi-Fi")
-                        },
-                        colors = NavigationBarItemDefaults.colors(
-                            selectedIconColor = Color(0xFF007BFF),
-                            selectedTextColor = Color(0xFF007BFF),
-                        )
-                    )
 
-                    NavigationBarItem(
-                        selected = currentDestination?.route == Screen.Settings.route,
-                        onClick = {
-                            navController.navigate(Screen.Settings.route){
-                                popUpTo(
-                                    navController.graph.startDestinationId
-                                ){
-                                    saveState = true
-                                }
-                                launchSingleTop = true
-                                restoreState = true
-                            }
-                        },
-                        icon = {
-                            Icon(
-                                painter = painterResource(id = R.drawable.ic_setting),
-                                contentDescription = "setting"
-                            )
-                        },
-                        label = {
-                            Text("Settings")
-                        },
-                        colors = NavigationBarItemDefaults.colors(
-                            selectedIconColor = Color(0xFF007BFF),
-                            selectedTextColor = Color(0xFF007BFF),
                         )
-                    )
+                    }
 
                 }
             }
