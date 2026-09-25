@@ -9,6 +9,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -76,7 +77,11 @@ fun AppNavigation() {
                         },
                         label = {
                             androidx.compose.material3.Text("Home")
-                        }
+                        },
+                        colors = NavigationBarItemDefaults.colors(
+                            selectedIconColor = Color(0xFF007BFF),
+                            selectedTextColor = Color(0xFF007BFF),
+                        )
                     )
 
                     NavigationBarItem(
@@ -100,7 +105,11 @@ fun AppNavigation() {
                         },
                         label = {
                             Text("Wi-Fi")
-                        }
+                        },
+                        colors = NavigationBarItemDefaults.colors(
+                            selectedIconColor = Color(0xFF007BFF),
+                            selectedTextColor = Color(0xFF007BFF),
+                        )
                     )
 
                     NavigationBarItem(
@@ -124,7 +133,11 @@ fun AppNavigation() {
                         },
                         label = {
                             Text("Settings")
-                        }
+                        },
+                        colors = NavigationBarItemDefaults.colors(
+                            selectedIconColor = Color(0xFF007BFF),
+                            selectedTextColor = Color(0xFF007BFF),
+                        )
                     )
 
                 }
