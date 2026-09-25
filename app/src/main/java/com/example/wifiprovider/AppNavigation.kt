@@ -93,7 +93,10 @@ fun AppNavigation() {
                             }
                         },
                         icon = {
-                            Text("📶")
+                            Icon(
+                                painter = painterResource(id = R.drawable.ic_wifi),
+                                contentDescription = "wifi"
+                            )
                         },
                         label = {
                             Text("Wi-Fi")
@@ -114,7 +117,10 @@ fun AppNavigation() {
                             }
                         },
                         icon = {
-                            Text("⚙️")
+                            Icon(
+                                painter = painterResource(id = R.drawable.ic_setting),
+                                contentDescription = "setting"
+                            )
                         },
                         label = {
                             Text("Settings")
