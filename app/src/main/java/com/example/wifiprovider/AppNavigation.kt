@@ -25,99 +25,139 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-
 @Composable
 fun AppNavigation() {
+
     val navController = rememberNavController()
 
     val navBackStackEntry by navController.currentBackStackEntryAsState()
 
     val currentDestination = navBackStackEntry?.destination
 
-    val item = listOf(
+    val items = listOf(
         Screen.Home,
         Screen.Wifi,
         Screen.Settings
     )
 
+    val showBottomBar = currentDestination?.route in listOf(
+        Screen.Home.route,
+        Screen.Wifi.route,
+        Screen.Settings.route
+    )
+
     Scaffold(
         bottomBar = {
-            Surface(
-                modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(
-                    topStart = 20.dp,
-                    topEnd = 20.dp
-                ),
-                border = BorderStroke(
-                    width = 1.dp,
-                    color = Color(0xFFD7E8FD)
-                ),
-                color = Color.White,
-                tonalElevation = 0.dp,
-                shadowElevation = 0.dp
-            )
-            {
-                NavigationBar(
-                    containerColor = Color.Transparent,
-                    tonalElevation = 0.dp
+
+            if (showBottomBar) {
+
+                Surface(
+                    modifier = Modifier.fillMaxWidth(),
+                    shape = RoundedCornerShape(
+                        topStart = 20.dp,
+                        topEnd = 20.dp
+                    ),
+                    border = BorderStroke(
+                        width = 1.dp,
+                        color = Color(0xFFD7E8FD)
+                    ),
+                    color = Color.White,
+                    tonalElevation = 0.dp,
+                    shadowElevation = 0.dp
                 ) {
-                    item.forEach { screen ->
-                        NavigationBarItem(
-                            selected = currentDestination?.route == screen.route,
-                            onClick = {
-                                navController.navigate(screen.route) {
-                                    popUpTo(
-                                        navController.graph.startDestinationId
-                                    ) {
-                                        saveState = true
+
+                    NavigationBar(
+                        containerColor = Color.Transparent,
+                        tonalElevation = 0.dp
+                    ) {
+
+                        items.forEach { screen ->
+
+                            NavigationBarItem(
+                                selected = currentDestination?.route == screen.route,
+
+                                onClick = {
+
+                                    navController.navigate(screen.route) {
+
+                                        popUpTo(
+                                            navController.graph.startDestinationId
+                                        ) {
+                                            saveState = true
+                                        }
+
+                                        launchSingleTop = true
+                                        restoreState = true
                                     }
+                                },
 
-                                    launchSingleTop = true
-                                    restoreState = true
-                                }
-                            },
-                            icon = {
-                                Icon(
-                                    painter = painterResource(id = screen.icon),
-                                    contentDescription = "Home"
+                                icon = {
+                                    Icon(
+                                        painter = painterResource(
+                                            id = screen.icon
+                                        ),
+                                        contentDescription = screen.title
+                                    )
+                                },
+
+                                label = {
+                                    Text(screen.title)
+                                },
+
+                                colors = NavigationBarItemDefaults.colors(
+                                    selectedIconColor = Color(0xFF007BFF),
+                                    selectedTextColor = Color(0xFF007BFF)
                                 )
-                            },
-                            label = {
-                                Text(screen.title)
-                            },
-                            colors = NavigationBarItemDefaults.colors(
-                                selectedIconColor = Color(0xFF007BFF),
-                                selectedTextColor = Color(0xFF007BFF),
-                                indicatorColor = Color.Transparent
                             )
-
-                        )
+                        }
                     }
-
                 }
             }
-
         }
-
     ) { paddingValues ->
+
         NavHost(
             navController = navController,
-            startDestination = Screen.Home.route,
+
+            // Splash is now first
+            startDestination = "splash",
+
             modifier = Modifier.padding(paddingValues)
-        )
-        {
+        ) {
+
+            // Splash Screen
+            composable("splash") {
+
+                SplashScreen(
+                    onGetStartedClick = {
+
+                        navController.navigate(Screen.Home.route) {
+
+                            // Remove splash from back stack
+                            popUpTo("splash") {
+                                inclusive = true
+                            }
+
+                            launchSingleTop = true
+                        }
+                    }
+                )
+            }
+
+            // Home
             composable(Screen.Home.route) {
                 HomeScreen()
             }
 
+            // Wi-Fi
             composable(Screen.Wifi.route) {
                 WifiScreen()
             }
 
+            // Settings
             composable(Screen.Settings.route) {
                 SettingsScreen()
             }
-
         }
     }
 }
