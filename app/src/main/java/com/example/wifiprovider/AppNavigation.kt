@@ -60,15 +60,15 @@ fun AppNavigation() {
                 NavigationBar(
                     containerColor = Color.Transparent,
                     tonalElevation = 0.dp
-                )  {
+                ) {
                     item.forEach { screen ->
                         NavigationBarItem(
                             selected = currentDestination?.route == screen.route,
                             onClick = {
-                                navController.navigate(screen.route){
+                                navController.navigate(screen.route) {
                                     popUpTo(
                                         navController.graph.startDestinationId
-                                    ){
+                                    ) {
                                         saveState = true
                                     }
 
