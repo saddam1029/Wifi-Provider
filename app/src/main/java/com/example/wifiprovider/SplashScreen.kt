@@ -10,8 +10,13 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBarsPadding
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -62,6 +67,28 @@ fun SplashScreen(
                 color = Color(0xFF666666),
                 fontSize = 13.sp,
                 fontWeight = androidx.compose.ui.text.font.FontWeight.Medium
+            )
+        }
+
+        Button(
+            onClick = onGetStartedClick,
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(90.dp)
+                .padding(
+                    horizontal = 20.dp,
+                    vertical = 20.dp
+                )
+                .align(Alignment.BottomCenter),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = Color(0xFF0066FF)
+            ),
+            shape = RoundedCornerShape(15.dp)
+        ) {
+            Text(
+                text = "Get Started",
+                fontSize = 15.sp,
+                fontWeight = androidx.compose.ui.text.font.FontWeight.Bold
             )
         }
 
