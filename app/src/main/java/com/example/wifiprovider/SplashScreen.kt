@@ -43,7 +43,8 @@ fun SplashScreen(
             modifier = Modifier.fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
-        ) {
+        )
+        {
             Image(
                 painter = painterResource(id = R.drawable.iv_app_logo),
                 contentDescription = "App Logo",
