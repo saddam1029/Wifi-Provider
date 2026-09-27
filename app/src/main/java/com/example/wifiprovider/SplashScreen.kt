@@ -1,12 +1,15 @@
 package com.example.wifiprovider
 
-import android.graphics.fonts.FontStyle
+import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -14,11 +17,17 @@ import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -36,11 +45,23 @@ import androidx.compose.ui.unit.sp
 fun SplashScreen(
     onGetStartedClick: () -> Unit
 ) {
+    var isButtonVisible by remember { mutableStateOf(false) }
+    val progress = remember { Animatable(0f) }
+
+    LaunchedEffect(Unit) {
+        progress.animateTo(
+            targetValue = 1f,
+            animationSpec = tween(durationMillis = 2000, easing = LinearEasing)
+        )
+        isButtonVisible = true
+    }
+
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(androidx.compose.ui.graphics.Color.White),
-    ) {
+            .background(Color.White),
+    )
+    {
         Column(
             modifier = Modifier.fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -69,45 +90,79 @@ fun SplashScreen(
                 textAlign = TextAlign.Center,
                 color = Color(0xFF666666),
                 fontSize = 13.sp,
-                fontWeight = androidx.compose.ui.text.font.FontWeight.Medium
+                fontWeight = FontWeight.Medium,
+                lineHeight = 15.sp
             )
         }
-        Button(
-            onClick = onGetStartedClick,
+
+        Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(90.dp)
-                .padding(
-                    horizontal = 20.dp,
-                    vertical = 20.dp
-                )
-                .clip(RoundedCornerShape(15.dp))
-                .background(
-                    brush = Brush.horizontalGradient(
-                        colors = listOf(
-                            Color(0xFF20A9FF), // Left
-                            Color(0xFF0066FF)  // Right
+                .align(Alignment.BottomCenter)
+                .navigationBarsPadding()
+                .padding(bottom = 25.dp),
+            contentAlignment = Alignment.Center
+        )
+        {
+            if (isButtonVisible) {
+                Button(
+                    onClick = onGetStartedClick,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(90.dp)
+                        .padding(
+                            horizontal = 20.dp,
+                            vertical = 20.dp
                         )
+                        .clip(RoundedCornerShape(15.dp))
+                        .background(
+                            brush = Brush.horizontalGradient(
+                                colors = listOf(
+                                    Color(0xFF20A9FF), // Left
+                                    Color(0xFF0066FF)  // Right
+                                )
+                            )
+                        ),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = Color.Transparent
+                    ),
+                    shape = RoundedCornerShape(15.dp)
+                ) {
+                    Text(
+                        text = "Get Started",
+                        fontSize = 15.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = Color.White
                     )
+                }
+            } else {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth(0.55f)
+                        .height(10.dp)
+                        .clip(CircleShape)
+                        .background(Color(0xFFE8EEFF)),
                 )
-                .align(Alignment.BottomCenter),
-            colors = ButtonDefaults.buttonColors(
-                containerColor = Color.Transparent
-            ),
-            shape = RoundedCornerShape(15.dp)
-        ) {
-            Text(
-                text = "Get Started",
-                fontSize = 15.sp,
-                fontWeight = FontWeight.Bold,
-                color = Color.White
-            )
+                {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth(progress.value)
+                            .fillMaxHeight()
+                            .clip(CircleShape)
+                            .background(
+                                brush = Brush.horizontalGradient(
+                                    colors = listOf(
+                                        Color(0xFF20A9FF),
+                                        Color(0xFF0066FF)
+                                    )
+                                )
+                            )
+                    )
+                }
+            }
         }
-
     }
-
 }
-
 
 @Preview(showBackground = true)
 @Composable
