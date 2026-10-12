@@ -16,6 +16,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Switch
 import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
@@ -40,6 +41,8 @@ import com.example.wifiprovider.ui.theme.WifiProviderTheme
 @Composable
 fun HomeScreen() {
     var isWifiEnabled by remember { mutableStateOf(false) }
+    var isDataEnabled by remember { mutableStateOf(false) }
+    var isHotspotEnabled by remember { mutableStateOf(false) }
 
 
     Column(
@@ -84,24 +87,29 @@ fun HomeScreen() {
         ) {
 
             Row(
-                Modifier.height(52.dp)
+                Modifier
+                    .height(52.dp)
                     .weight(1f)
                     .clip(RoundedCornerShape(16.dp))
-                    .background(Color(0xFFF2F6FF))
+                    .background(
+                        if (isWifiEnabled) Color(0xFF128CFC)
+                        else Color(0xFFF2F6FF)
+                    )
                     .padding(horizontal = 12.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_wifi),
                     contentDescription = null,
-                    tint = Color(0xFF666666),
+                    tint = if (isWifiEnabled) Color.White else Color(0xFF666666),
                     modifier = Modifier.size(20.dp)
                 )
+
                 Spacer(modifier = Modifier.width(6.dp))
 
                 Text(
                     text = "Wifi",
-                    color = Color(0xFF666666),
+                    color = if (isWifiEnabled) Color.White else Color(0xFF666666),
                     fontWeight = FontWeight.Medium,
                     fontSize = 14.sp
                 )
@@ -114,7 +122,7 @@ fun HomeScreen() {
                     modifier = Modifier.scale(0.75f),
                     colors = SwitchDefaults.colors(
                         checkedThumbColor = Color.White,
-                        checkedTrackColor = Color(0xFFB0B0B0),
+                        checkedTrackColor = Color(0xFF57A9FD),
                         uncheckedThumbColor = Color.White,
                         uncheckedTrackColor = Color(0xFFD1D1D1),
                         uncheckedBorderColor = Color.Transparent
@@ -126,14 +134,17 @@ fun HomeScreen() {
                 Modifier.height(52.dp)
                     .weight(1f)
                     .clip(RoundedCornerShape(16.dp))
-                    .background(Color(0xFFF2F6FF))
+                    .background(
+                        if (isDataEnabled) Color(0xFF128CFC)
+                    else
+                    Color(0xFFF2F6FF))
                     .padding(horizontal = 12.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_data),
                     contentDescription = null,
-                    tint = Color(0xFF666666),
+                    tint = if (isDataEnabled)Color.White else Color(0xFF666666),
                     modifier = Modifier.size(20.dp)
                 )
 
@@ -141,13 +152,45 @@ fun HomeScreen() {
 
                 Text(
                     text = "Date",
-                    color = Color(0xFF666666),
+                    color = if (isDataEnabled) Color.White else Color(0xFF666666),
                     fontWeight = FontWeight.Medium,
                     fontSize = 14.sp
                 )
+
+                Spacer(modifier = Modifier.weight(1f))
+
+                Switch(
+                    checked = isDataEnabled,
+                    onCheckedChange = { isDataEnabled = it },
+                    modifier = Modifier.scale(0.75f),
+                    colors = SwitchDefaults.colors(
+                        checkedThumbColor = Color.White,
+                        checkedTrackColor = Color(0xFF57A9FD),
+                        uncheckedThumbColor = Color.White,
+                        uncheckedTrackColor = Color(0xFFD1D1D1),
+                        uncheckedBorderColor = Color.Transparent
+                    )
+                )
             }
         }
+
+        Spacer(modifier = Modifier.height(10.dp))
+
+        IconButton(
+            onClick = { isHotspotEnabled = !isHotspotEnabled },
+            modifier = Modifier.size(120.dp),
+        ) {
+            Icon(
+                painter = painterResource(
+                    id = if (isHotspotEnabled) R.drawable.ic_hotspot_on else R.drawable.ic_hotspot_off
+                ),
+                contentDescription = "Toggle Hotspot",
+                tint = Color.Unspecified,
+                modifier = Modifier.fillMaxSize()
+            )
+        }
     }
+
 }
 
 

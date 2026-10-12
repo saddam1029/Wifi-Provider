@@ -121,7 +121,8 @@ fun AppNavigation() {
             navController = navController,
 
             // Splash is now first
-            startDestination = "splash",
+//            startDestination = "splash",
+            startDestination = Screen.Home.route,
 
             modifier = Modifier.padding(paddingValues)
         ) {
