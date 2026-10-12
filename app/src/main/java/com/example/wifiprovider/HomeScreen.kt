@@ -1,5 +1,6 @@
 package com.example.wifiprovider
 
+import android.graphics.drawable.Icon
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -210,7 +211,7 @@ fun HomeScreen() {
             shape = RoundedCornerShape(20.dp)
         ) {
             Text(
-                text = if (isHotspotEnabled)"2 Devices Connected" else "No Device Connected",
+                text = if (isHotspotEnabled) "2 Devices Connected" else "No Device Connected",
                 modifier = Modifier.padding(horizontal = 13.dp, vertical = 4.dp),
                 color = Color(0xFF666666),
                 fontWeight = FontWeight.Medium,
@@ -220,18 +221,105 @@ fun HomeScreen() {
 
         Spacer(modifier = Modifier.height(32.dp))
 
-       Card(
-           Modifier.height(140.dp),
-           shape = RoundedCornerShape(24.dp),
-           colors = CardDefaults.cardColors(Color(0xFFFFF6EF))
-       ) {
-           Column(
-               Modifier.fillMaxSize()
-                   .padding(16.dp)
-           ) { }
-       }
+        Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
+            Row(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
+                CardItem(
+                    modifier = Modifier.weight(1f),
+                    icon = R.drawable.ic_timer,
+                    title = "Timer",
+                    subtitle = "Auto-turn off",
+                    value = "1h 20m",
+                    containerColor = Color(0xFFF9EFFF)
+                )
+
+                CardItem(
+                    modifier = Modifier.weight(1f),
+                    icon = R.drawable.ic_timer,
+                    title = "Timer",
+                    subtitle = "Auto-turn off",
+                    value = "1h 20m",
+                    containerColor = Color(0xFFF9EFFF)
+                )
+            }
+            
+            Row(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
+                CardItem(
+                    modifier = Modifier.weight(1f),
+                    icon = R.drawable.ic_timer,
+                    title = "Timer",
+                    subtitle = "Auto-turn off",
+                    value = "1h 20m",
+                    containerColor = Color(0xFFF9EFFF)
+                )
+
+                CardItem(
+                    modifier = Modifier.weight(1f),
+                    icon = R.drawable.ic_timer,
+                    title = "Timer",
+                    subtitle = "Auto-turn off",
+                    value = "1h 20m",
+                    containerColor = Color(0xFFF9EFFF)
+                )
+            }
+        }
     }
 
+}
+
+@Composable
+fun CardItem(
+    modifier: Modifier = Modifier,
+    icon: Int,
+    title: String,
+    subtitle: String,
+    value: String,
+    containerColor: Color
+) {
+    Card(
+        modifier = modifier.height(140.dp),
+        shape = RoundedCornerShape(24.dp),
+        colors = CardDefaults.cardColors(containerColor)
+    ) {
+        Column(
+            Modifier
+                .fillMaxSize()
+                .padding(16.dp)
+        ) {
+            Row(
+                Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+            ) {
+                Icon(
+                    painter = painterResource(id = icon),
+                    contentDescription = null,
+                    tint = Color.Unspecified,
+                    modifier = Modifier.size(45.dp)
+                )
+                Text(
+                    text = title,
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 14.sp
+                )
+            }
+            Spacer(Modifier.height(12.dp))
+
+            Text(
+                text = subtitle,
+                fontWeight = FontWeight.Bold,
+                fontSize = 16.sp
+            )
+            Text(
+                text = value,
+                fontSize = 12.sp,
+                color = Color.Gray
+            )
+        }
+    }
+}
+
+@Composable
+fun CardItem() {
+    TODO("Not yet implemented")
 }
 
 
