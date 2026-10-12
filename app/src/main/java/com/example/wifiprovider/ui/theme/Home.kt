@@ -264,12 +264,14 @@ fun FeatureCard(
     subtitle: String,
     value: String,
     containerColor: Color
-) {
+)
+{
     Card(
         modifier = modifier.height(140.dp),
         shape = RoundedCornerShape(24.dp),
         colors = CardDefaults.cardColors(containerColor = containerColor)
-    ) {
+    )
+    {
         Column(
             modifier = Modifier
                 .padding(16.dp)

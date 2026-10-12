@@ -15,8 +15,11 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Switch
 import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
@@ -54,7 +57,8 @@ fun HomeScreen() {
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Row(
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier
+                .fillMaxWidth()
                 .padding(vertical = 8.dp)
         ) {
             Text(
@@ -83,7 +87,7 @@ fun HomeScreen() {
 
         Row(
             modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(16.dp)
+            horizontalArrangement = Arrangement.spacedBy(35.dp)
         ) {
 
             Row(
@@ -131,20 +135,22 @@ fun HomeScreen() {
             }
 
             Row(
-                Modifier.height(52.dp)
+                Modifier
+                    .height(52.dp)
                     .weight(1f)
                     .clip(RoundedCornerShape(16.dp))
                     .background(
                         if (isDataEnabled) Color(0xFF128CFC)
-                    else
-                    Color(0xFFF2F6FF))
+                        else
+                            Color(0xFFF2F6FF)
+                    )
                     .padding(horizontal = 12.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_data),
                     contentDescription = null,
-                    tint = if (isDataEnabled)Color.White else Color(0xFF666666),
+                    tint = if (isDataEnabled) Color.White else Color(0xFF666666),
                     modifier = Modifier.size(20.dp)
                 )
 
@@ -178,7 +184,7 @@ fun HomeScreen() {
 
         IconButton(
             onClick = { isHotspotEnabled = !isHotspotEnabled },
-            modifier = Modifier.size(120.dp),
+            modifier = Modifier.size(130.dp),
         ) {
             Icon(
                 painter = painterResource(
@@ -189,6 +195,41 @@ fun HomeScreen() {
                 modifier = Modifier.fillMaxSize()
             )
         }
+
+        Spacer(modifier = Modifier.height(12.dp))
+
+        Text(
+            text = if (isHotspotEnabled) "Hotspot Active" else "Tap to turn on Hotspot",
+            fontWeight = FontWeight.Medium,
+            fontSize = 14.sp
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+
+        Surface(
+            color = Color(0xFFEFF4FF),
+            shape = RoundedCornerShape(20.dp)
+        ) {
+            Text(
+                text = if (isHotspotEnabled)"2 Devices Connected" else "No Device Connected",
+                modifier = Modifier.padding(horizontal = 13.dp, vertical = 4.dp),
+                color = Color(0xFF666666),
+                fontWeight = FontWeight.Medium,
+                fontSize = 11.sp
+            )
+        }
+
+        Spacer(modifier = Modifier.height(32.dp))
+
+       Card(
+           Modifier.height(140.dp),
+           shape = RoundedCornerShape(24.dp),
+           colors = CardDefaults.cardColors(Color(0xFFFFF6EF))
+       ) {
+           Column(
+               Modifier.fillMaxSize()
+                   .padding(16.dp)
+           ) { }
+       }
     }
 
 }
