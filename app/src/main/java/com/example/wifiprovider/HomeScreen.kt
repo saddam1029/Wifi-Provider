@@ -4,22 +4,157 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Icon
+import androidx.compose.material3.Switch
+import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.example.wifiprovider.ui.screens.Home
+import com.example.wifiprovider.ui.theme.WifiProviderTheme
 
 @Composable
 fun HomeScreen() {
+    var isWifiEnabled by remember { mutableStateOf(false) }
+
+
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.White),
+            .background(Color.White)
+            .padding(16.dp)
+            .verticalScroll(rememberScrollState()),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
     ) {
-        Text(text = "Home Screen")
+        Row(
+            modifier = Modifier.fillMaxWidth()
+                .padding(vertical = 8.dp)
+        ) {
+            Text(
+                text = "WI-FI",
+                fontSize = 24.sp,
+                fontWeight = FontWeight.Bold,
+                color = Color(0xFF007BFF)
+            )
+            Text(
+                text = "Manager",
+                fontSize = 24.sp,
+                fontWeight = FontWeight.Bold,
+                color = Color.Black
+            )
+
+            Spacer(Modifier.weight(1f))
+
+            Icon(
+                painter = painterResource(id = R.drawable.ic_setting),
+                contentDescription = "Settings",
+                modifier = Modifier.size(28.dp)
+            )
+        }
+
+        Spacer(Modifier.size(16.dp))
+
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+
+            Row(
+                Modifier.height(52.dp)
+                    .weight(1f)
+                    .clip(RoundedCornerShape(16.dp))
+                    .background(Color(0xFFF2F6FF))
+                    .padding(horizontal = 12.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_wifi),
+                    contentDescription = null,
+                    tint = Color(0xFF666666),
+                    modifier = Modifier.size(20.dp)
+                )
+                Spacer(modifier = Modifier.width(6.dp))
+
+                Text(
+                    text = "Wifi",
+                    color = Color(0xFF666666),
+                    fontWeight = FontWeight.Medium,
+                    fontSize = 14.sp
+                )
+
+                Spacer(modifier = Modifier.weight(1f))
+
+                Switch(
+                    checked = isWifiEnabled,
+                    onCheckedChange = { isWifiEnabled = it },
+                    modifier = Modifier.scale(0.75f),
+                    colors = SwitchDefaults.colors(
+                        checkedThumbColor = Color.White,
+                        checkedTrackColor = Color(0xFFB0B0B0),
+                        uncheckedThumbColor = Color.White,
+                        uncheckedTrackColor = Color(0xFFD1D1D1),
+                        uncheckedBorderColor = Color.Transparent
+                    )
+                )
+            }
+
+            Row(
+                Modifier.height(52.dp)
+                    .weight(1f)
+                    .clip(RoundedCornerShape(16.dp))
+                    .background(Color(0xFFF2F6FF))
+                    .padding(horizontal = 12.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_data),
+                    contentDescription = null,
+                    tint = Color(0xFF666666),
+                    modifier = Modifier.size(20.dp)
+                )
+
+                Spacer(modifier = Modifier.width(6.dp))
+
+                Text(
+                    text = "Date",
+                    color = Color(0xFF666666),
+                    fontWeight = FontWeight.Medium,
+                    fontSize = 14.sp
+                )
+            }
+        }
+    }
+}
+
+
+@Preview(showBackground = true)
+@Composable
+fun HomeScreenPreview() {
+    WifiProviderTheme {
+        HomeScreen()
     }
 }

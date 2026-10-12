@@ -22,7 +22,7 @@ import com.example.wifiprovider.R
 import com.example.wifiprovider.ui.theme.WifiProviderTheme
 
 @Composable
-fun HomeScreen() {
+fun Home() {
     var isWifiEnabled by remember { mutableStateOf(false) }
     var isDataEnabled by remember { mutableStateOf(true) }
     var isHotspotEnabled by remember { mutableStateOf(false) }
@@ -33,7 +33,8 @@ fun HomeScreen() {
             .background(Color.White)
             .verticalScroll(rememberScrollState())
             .padding(16.dp)
-    ) {
+    )
+    {
         // Top Bar
         Row(
             modifier = Modifier
@@ -68,7 +69,8 @@ fun HomeScreen() {
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.spacedBy(16.dp)
-        ) {
+        )
+        {
             // Wifi Card
             Card(
                 modifier = Modifier
@@ -78,7 +80,8 @@ fun HomeScreen() {
                 colors = CardDefaults.cardColors(
                     containerColor = Color(0xFFF2F6FF)
                 )
-            ) {
+            )
+            {
                 Row(
                     modifier = Modifier
                         .fillMaxSize()
@@ -306,8 +309,8 @@ fun FeatureCard(
 
 @Preview(showBackground = true)
 @Composable
-fun HomeScreenPreview() {
+fun HomePreview() {
     WifiProviderTheme {
-        HomeScreen()
+        Home()
     }
 }
