@@ -234,31 +234,31 @@ fun HomeScreen() {
 
                 CardItem(
                     modifier = Modifier.weight(1f),
-                    icon = R.drawable.ic_timer,
-                    title = "Timer",
-                    subtitle = "Auto-turn off",
-                    value = "1h 20m",
-                    containerColor = Color(0xFFF9EFFF)
+                    icon = R.drawable.ic_battery_limit,
+                    title = "Battery Limit",
+                    subtitle = "Stop When Low",
+                    value = "20%",
+                    containerColor = Color(0xFFEFF4FF)
                 )
             }
             
             Row(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
                 CardItem(
                     modifier = Modifier.weight(1f),
-                    icon = R.drawable.ic_timer,
-                    title = "Timer",
-                    subtitle = "Auto-turn off",
-                    value = "1h 20m",
-                    containerColor = Color(0xFFF9EFFF)
+                    icon = R.drawable.ic_data_limit,
+                    title = "Data Limit",
+                    subtitle = "Usage Tracking",
+                    value = "2.0 GB",
+                    containerColor = Color(0xFFFFF6EF)
                 )
 
                 CardItem(
                     modifier = Modifier.weight(1f),
-                    icon = R.drawable.ic_timer,
-                    title = "Timer",
-                    subtitle = "Auto-turn off",
-                    value = "1h 20m",
-                    containerColor = Color(0xFFF9EFFF)
+                    icon = R.drawable.ic_temperature_limit,
+                    title = "Temperature Limit",
+                    subtitle = "Stop when exceeds",
+                    value = "40° C",
+                    containerColor = Color(0xFFFFEFEF)
                 )
             }
         }
@@ -306,21 +306,17 @@ fun CardItem(
             Text(
                 text = subtitle,
                 fontWeight = FontWeight.Bold,
-                fontSize = 16.sp
+                fontSize = 14.sp
             )
             Text(
                 text = value,
-                fontSize = 12.sp,
+                fontSize = 11.sp,
                 color = Color.Gray
             )
         }
     }
 }
 
-@Composable
-fun CardItem() {
-    TODO("Not yet implemented")
-}
 
 
 @Preview(showBackground = true)
